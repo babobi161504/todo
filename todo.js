@@ -20,6 +20,23 @@ document.addEventListener("DOMContentLoaded", function () {
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
 
+      editButton.addEventListener("click", function () {
+        const taskInput = document.createElement("input");
+        taskInput.type = "text";
+        taskInput.value = taskSpan.textContent;
+        taskDiv.replaceChild(taskInput, taskSpan);
+
+        // Create a save button
+        const saveButton = document.createElement("button");
+        saveButton.textContent = "Save";
+        taskDiv.replaceChild(saveButton, editButton);
+
+        saveButton.addEventListener("click", function () {
+          taskSpan.textContent = taskInput.value;
+          taskDiv.replaceChild(taskSpan, taskInput);
+          taskDiv.replaceChild(editButton, saveButton);
+        });
+      });
       taskDiv.appendChild(checkbox);
       taskDiv.appendChild(taskSpan);
       taskDiv.appendChild(editButton);
