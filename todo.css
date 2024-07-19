@@ -86,3 +86,8 @@ body {
 .filter {
     padding: 5px;
 }
+
+/* Check task CSS */
+.completed {
+    text-decoration: line-through;
+}

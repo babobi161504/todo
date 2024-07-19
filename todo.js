@@ -37,6 +37,24 @@ document.addEventListener("DOMContentLoaded", function () {
           taskDiv.replaceChild(editButton, saveButton);
         });
       });
+
+      //Delete task
+      deleteButton.addEventListener("click", function() {
+        todoList.removeChild(taskDiv)
+      })
+
+      //Checkbox task
+      checkbox.addEventListener("change", function() {
+        if (checkbox.checked) {
+          taskDiv.classList.add('completed');
+          todoList.appendChild(taskDiv)
+        } else {
+          taskDiv.classList.remove('completed')
+          todoList.insertBefore(taskDiv, todoList.firstChild);
+        }
+      })
+
+
       taskDiv.appendChild(checkbox);
       taskDiv.appendChild(taskSpan);
       taskDiv.appendChild(editButton);
@@ -45,6 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
       todoList.appendChild(taskDiv);
 
       todoInput.value = "";
+    } else if (taskName === '') {
+      alert('Please input task name before adding a task');
     }
   });
 });
