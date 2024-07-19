@@ -2,11 +2,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const todoInput = document.getElementById("id-todo-input");
   const addButton = document.getElementById("id-add-button");
   const todoList = document.getElementById("id-todo-list");
+  const filterDropdown = document.querySelector(".filter");
 
+
+  
   addButton.addEventListener("click", function () {
     const taskName = todoInput.value.trim();
     if (taskName !== "") {
       const taskDiv = document.createElement("div");
+      taskDiv.className = "todo-item"
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
@@ -19,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
+      deleteButton.className = "delete"
 
       editButton.addEventListener("click", function () {
         const taskInput = document.createElement("input");
@@ -41,17 +46,19 @@ document.addEventListener("DOMContentLoaded", function () {
       //Delete task
       deleteButton.addEventListener("click", function() {
         todoList.removeChild(taskDiv)
+        filterTasks()
       })
 
       //Checkbox task
       checkbox.addEventListener("change", function() {
         if (checkbox.checked) {
           taskDiv.classList.add('completed');
-          todoList.appendChild(taskDiv)
+          
         } else {
           taskDiv.classList.remove('completed')
-          todoList.insertBefore(taskDiv, todoList.firstChild);
+          
         }
+        filterTasks()
       })
 
 
@@ -67,4 +74,24 @@ document.addEventListener("DOMContentLoaded", function () {
       alert('Please input task name before adding a task');
     }
   });
-});
+  
+  function filterTasks() {
+    const filterValue = filterDropdown.value
+    const tasks = todoList.querySelectorAll('.todo-item')
+
+    tasks.forEach(task => {
+      const isCompleted = task.classList.contains('completed')
+
+      if (filterValue === 'all') {
+        task.style.display = 'flex'
+      } else if (filterValue === 'done') {
+        task.style.display = isCompleted ? 'flex' : 'none'
+      } else if (filterValue === 'undone') {
+        task.style.display = isCompleted ? 'none' : 'flex'
+      }
+    })
+  }
+
+  filterDropdown.addEventListener("change", filterTasks)
+})
+
