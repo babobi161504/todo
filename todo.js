@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const addButton = document.getElementById("id-add-button");
   const todoList = document.getElementById("id-todo-list");
   const filterDropdown = document.querySelector(".filter");
-
+  const cancelButton = document.querySelector(".cancel")
 
   
   addButton.addEventListener("click", function () {
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
-
+      
       const taskSpan = document.createElement("span");
       taskSpan.textContent = taskName;
 
@@ -74,7 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
       alert('Please input task name before adding a task');
     }
   });
+
+  // Cancel-input
+  cancelButton.addEventListener("click",function() {
+    todoInput.value = ''
+  })
   
+  // Filter task
   function filterTasks() {
     const filterValue = filterDropdown.value
     const tasks = todoList.querySelectorAll('.todo-item')
