@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
       checkbox.addEventListener("change", function() {
         if (checkbox.checked) {
           taskDiv.classList.add('completed');
-          
+          todoList.appendChild(taskDiv);
         } else {
           taskDiv.classList.remove('completed')
           
@@ -61,15 +61,15 @@ document.addEventListener("DOMContentLoaded", function () {
         filterTasks()
       })
 
-
       taskDiv.appendChild(checkbox);
       taskDiv.appendChild(taskSpan);
       taskDiv.appendChild(editButton);
       taskDiv.appendChild(deleteButton);
-
       todoList.appendChild(taskDiv);
 
       todoInput.value = "";
+      filterTasks();
+    
     } else if (taskName === '') {
       alert('Please input task name before adding a task');
     }
