@@ -88,6 +88,6 @@ body {
 }
 
 /* Check task CSS */
-.completed {
+.completed span {
     text-decoration: line-through;
 }
